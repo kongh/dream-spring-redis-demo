@@ -37,7 +37,7 @@ public class UserRepository {
      */
     public void delete(Integer id){
         HashOperations<String, Object, Object> opsForHash = redisTemplate.opsForHash();
-        opsForHash.delete(User.class.getName(),id);
+        opsForHash.delete(User.class.getName(), id);
     }
 
     /**
@@ -84,5 +84,12 @@ public class UserRepository {
         User user = new User();
         opsForSet.add(User.class.getName(),user);
         return redisTemplate.sort(query);
+    }
+
+    public void test(User user){
+        ListOperations<String, User> opsForList = redisTemplate.opsForList();
+        opsForList.rightPush(User.class.getName()+"_list",user);
+
+        opsForList.range(User.class.getName()+"_list",0,100);
     }
 }

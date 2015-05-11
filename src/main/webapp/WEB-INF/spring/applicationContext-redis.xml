@@ -18,11 +18,14 @@
 
 	<context:component-scan base-package="com.coder.dream.redis.samples"/>
 
-	<!--<bean id="redisTempalte" class="org.springframework.data.redis.core.StringRedisTemplate">-->
-		<!--<property name="connectionFactory" ref="connectionFactory"/>-->
-	<!--</bean>-->
-
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		<property name="connectionFactory" ref="connectionFactory"/>
 	</bean>
+
+	<bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" >
+		<constructor-arg ref="redisTemplate"/>
+		<property name="defaultExpiration" value="100000000"/>
+		<property name="usePrefix" value="true"/>
+	</bean>
+
 </beans>

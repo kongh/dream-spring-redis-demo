@@ -65,4 +65,11 @@ public class UserController {
     public List<User> page(Integer begin,Integer size){
         return userRepository.page();
     }
+
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @ResponseBody
+    public String test(User user){
+        userRepository.test(user);
+        return "success";
+    }
 }
